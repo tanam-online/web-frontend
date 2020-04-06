@@ -1,6 +1,6 @@
 # Tanam Web Frontend
 
-Web app is accessible on [tanam.xyz](https://tanam.xyz).<br />
+Web app is accessible on [tanam.online](http://tanam.online).<br />
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
