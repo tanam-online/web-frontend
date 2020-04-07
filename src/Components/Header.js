@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import PropTypes from "prop-types"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
-import Logo from "../logo.png"
+import Logo from "../Assets/logo.png"
 
 function ElevationScroll(props) {
   const { children, window } = props
@@ -95,9 +95,8 @@ function HeaderComponent(props) {
               </Button>
               <Button
                 component={Link}
-                to="/logout"
+                to="/"
                 color="inherit"
-                variant={path === "/logout" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
               >
                 Logout
@@ -115,13 +114,13 @@ function HeaderComponent(props) {
               </IconButton>
               <Typography
                 variant="h6"
-                style={{ flexGrow: 1, color: "#4da708" }}
+                style={{ flexGrow: 1, color: "#41d76c" }}
               >
                 Tanam
               </Typography>
               <Button
                 component={Link}
-                to="/"
+                to="/monitoring"
                 color="inherit"
                 variant={path === "/" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}

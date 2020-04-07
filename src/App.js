@@ -3,10 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 // import './App.css';
 import Box from "@material-ui/core/Box"
 import Container from "@material-ui/core/Container"
-import Detail from "./Components/Detail"
 import Header from "./Components/Header"
-import ProductList from "./Components/ProductList"
-import Submission from "./Components/Submission"
+import Footer from "./Components/Footer"
+import Home from "./Components/Home"
+import Monitoring from "./Components/Monitoring"
+import Prediction from "./Components/Prediction"
+import Recommendation from "./Components/Recommendation"
+import Account from "./Components/Account"
+import SignUp from "./Components/SignUp"
+import Login from "./Components/Login"
 
 function App() {
   return (
@@ -17,17 +22,30 @@ function App() {
           <Container>
             <Box my={12.5}>
               <Route exact path="/">
-                <Submission />
+                <Home />
               </Route>
-              <Route path="/monitoring">
-                <ProductList />
+              {/* <Route path="/monitoring">
+                <Monitoring />
               </Route>
               <Route path="/prediction">
-                <Detail />
+                <Prediction />
               </Route>
+              <Route path="/recommendation">
+                <Recommendation />
+              </Route>
+              <Route path="/account">
+                <Account />
+              </Route>
+              <Route path="/sign-up">
+                <SignUp />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route> */}
             </Box>
           </Container>
         </Switch>
+        {/* <Footer /> */}
       </div>
     </Router>
   )
