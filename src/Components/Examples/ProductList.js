@@ -14,7 +14,7 @@ import TableRow from "@material-ui/core/TableRow"
 import Paper from "@material-ui/core/Paper"
 import PropTypes from "prop-types"
 import axios from "axios"
-import API from "../config"
+import API from "../../config"
 
 const StyledTableCell = withStyles(theme => ({
   head: {

@@ -11,7 +11,7 @@ import { withStyles } from "@material-ui/core/styles"
 import { Bar } from "react-chartjs-2"
 import PropTypes from "prop-types"
 import axios from "axios"
-import API from "../config"
+import API from "../../config"
 
 const useStyles = () => ({
   root: {

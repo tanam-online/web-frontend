@@ -40,7 +40,7 @@ function HeaderComponent(props) {
     <div style={{ flexGrow: 1 }}>
       <ElevationScroll props={props}>
         <AppBar position="fixed" color="white">
-          {path !== "/" ? (
+          {path !== "/" && path !== "/login" && path !== "/sign-up" ? (
             <Toolbar>
               <IconButton
                 edge="start"
@@ -120,9 +120,27 @@ function HeaderComponent(props) {
               </Typography>
               <Button
                 component={Link}
-                to="/monitoring"
+                to="/"
                 color="inherit"
                 variant={path === "/" ? "outlined" : "text"}
+                style={{ color: "#41d76c", textTransform: "none" }}
+              >
+                Home
+              </Button>
+              {/* to="/sign-up" */}
+              <Button
+                component={Link}
+                color="inherit"
+                variant={path === "/sign-up" ? "outlined" : "text"}
+                style={{ color: "#41d76c", textTransform: "none" }}
+              >
+                Sign Up
+              </Button>
+              {/* to="/login" */}
+              <Button
+                component={Link}
+                color="inherit"
+                variant={path === "/login" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
               >
                 Login
