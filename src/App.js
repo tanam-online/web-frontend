@@ -45,7 +45,7 @@ function App() {
             </Box>
           </Container>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   )

@@ -53,11 +53,11 @@ function Home() {
               </p>
             </Grid>
             <Grid item xs={12}>
-              {/* to="/login" */}
               <Button
                 component={Link}
                 color="inherit"
                 variant="outlined"
+                to="/login"
                 style={{ color: "green", textTransform: "none" }}
               >
                 Coba Sekarang

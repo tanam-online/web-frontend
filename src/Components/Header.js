@@ -127,18 +127,18 @@ function HeaderComponent(props) {
               >
                 Home
               </Button>
-              {/* to="/sign-up" */}
               <Button
                 component={Link}
+                to="/sign-up"
                 color="inherit"
                 variant={path === "/sign-up" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
               >
                 Sign Up
               </Button>
-              {/* to="/login" */}
               <Button
                 component={Link}
+                to="/login"
                 color="inherit"
                 variant={path === "/login" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
