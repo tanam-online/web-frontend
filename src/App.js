@@ -6,11 +6,11 @@ import Container from "@material-ui/core/Container"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Home from "./Components/Home"
-import Monitoring from "./Components/Monitoring"
+/* import Monitoring from "./Components/Monitoring"
 import Prediction from "./Components/Prediction"
 import Recommendation from "./Components/Recommendation"
 import Account from "./Components/Account"
-import SignUp from "./Components/SignUp"
+import SignUp from "./Components/SignUp" */
 import Login from "./Components/Login"
 
 function App() {
@@ -38,10 +38,10 @@ function App() {
               </Route>
               <Route path="/sign-up">
                 <SignUp />
-              </Route>
+              </Route> */}
               <Route path="/login">
                 <Login />
-              </Route> */}
+              </Route>
             </Box>
           </Container>
         </Switch>
