@@ -11,31 +11,56 @@ function Footer() {
   return (
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid container item justify="flex-end" align="center" xs={6}>
-        <a href="#main" style={{ textDecoration: "none" }}>
+        <a
+          href="https://www.instagram.com/isfnr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
           <Icon>
             <img src={Instagram} alt="Instagram" height="20" width="20" />
           </Icon>
         </a>
         &nbsp;
-        <a href="#main" style={{ textDecoration: "none" }}>
+        <a
+          href="https://www.instagram.com/isfnr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
           <Icon>
             <img src={Facebook} alt="Facebook" height="20" width="20" />
           </Icon>
         </a>
         &nbsp;
-        <a href="#main" style={{ textDecoration: "none" }}>
+        <a
+          href="https://www.instagram.com/isfnr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
           <Icon>
             <img src={Line} alt="Line" height="20" width="20" />
           </Icon>
         </a>
         &nbsp;
-        <a href="#main" style={{ textDecoration: "none" }}>
+        <a
+          href="https://www.instagram.com/isfnr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
           <Icon>
             <img src={Twitter} alt="Twitter" height="20" width="20" />
           </Icon>
         </a>
         &nbsp;
-        <a href="#main" style={{ textDecoration: "none" }}>
+        <a
+          href="https://www.instagram.com/isfnr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
           <Icon>
             <img src={LinkedIn} alt="LinkedIn" height="20" width="20" />
           </Icon>

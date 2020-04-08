@@ -76,7 +76,7 @@ function Home() {
       <Grid item xs={12}>
         <Grid container spacing={3} justify="center" alignItems="center">
           <Grid container item justify="center" xs={12} md={4}>
-            <Card className={classes.root}>
+            <Card className={classes.root} elevation={3}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
@@ -100,7 +100,7 @@ function Home() {
             </Card>
           </Grid>
           <Grid container item justify="center" xs={12} md={4}>
-            <Card className={classes.root}>
+            <Card className={classes.root} elevation={3}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
@@ -124,7 +124,7 @@ function Home() {
             </Card>
           </Grid>
           <Grid container item justify="center" xs={12} md={4}>
-            <Card className={classes.root}>
+            <Card className={classes.root} elevation={3}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
