@@ -13,6 +13,7 @@ import Recommendation from "./Components/Recommendation"
 import Account from "./Components/Account" */
 import SignUp from "./Components/SignUp"
 import Login from "./Components/Login"
+import NotFound from "./Components/NotFound"
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route path="/login">
                 <Login />
               </Route>
+              <Route component={NotFound} />
             </Box>
           </Container>
         </Switch>
