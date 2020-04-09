@@ -20,9 +20,9 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <Switch>
-          <Container>
-            <Box my={12.5}>
+        <Container>
+          <Box my={12.5}>
+            <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
@@ -39,16 +39,16 @@ function App() {
               <Route path="/account">
                 <Account />
               </Route> */}
-              <Route path="/sign-up">
+              <Route exact path="/sign-up">
                 <SignUp />
               </Route>
-              <Route path="/login">
+              <Route exact path="/login">
                 <Login />
               </Route>
               <Route component={NotFound} />
-            </Box>
-          </Container>
-        </Switch>
+            </Switch>
+          </Box>
+        </Container>
         <Footer />
       </div>
     </Router>
