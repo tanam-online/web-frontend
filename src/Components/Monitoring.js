@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 function Monitoring() {
   const classes = useStyles()
   const dataSuhu = {
-    labels: ["Jan", "Feb", "March"],
+    labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
       {
         label: "Suhu",
@@ -38,7 +38,7 @@ function Monitoring() {
     ]
   }
   const dataKelembaban = {
-    labels: ["Jan", "Feb", "March", "April", "May"],
+    labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
       {
         label: "Kelembaban",
@@ -48,7 +48,7 @@ function Monitoring() {
     ]
   }
   const dataCahaya = {
-    labels: ["Jan", "Feb", "March"],
+    labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
       {
         label: "Cahaya",
@@ -58,12 +58,12 @@ function Monitoring() {
     ]
   }
   const dataAngin = {
-    labels: ["Jan", "Feb", "March"],
+    labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
       {
         label: "Angin",
         data: [86, 67, 91, 54, 65, 23],
-        backgroundColor: "#513C2C"
+        backgroundColor: "#A8C9C9"
       }
     ]
   }
@@ -131,7 +131,7 @@ function Monitoring() {
                 variant="subtitle1"
                 component="h2"
               >
-                Cerah
+                <span style={{ color: "#41d76c" }}>Cerah</span>
               </Typography>
               <hr />
               <Typography
@@ -147,13 +147,13 @@ function Monitoring() {
                 variant="subtitle1"
                 component="h2"
               >
-                Suhu: 10
+                Suhu: <span style={{ color: "#41d76c" }}>10 &deg;C</span>
                 <br />
-                Kelembaban: 43
+                Kelembaban: <span style={{ color: "#41d76c" }}>43%</span>
                 <br />
-                Cahaya: 33
+                Cahaya: <span style={{ color: "#41d76c" }}>33 Cd</span>
                 <br />
-                Angin: 40
+                Angin: <span style={{ color: "#41d76c" }}>2.54 m/s</span>
                 <br />
               </Typography>
               <hr />
@@ -166,13 +166,13 @@ function Monitoring() {
                 Status Sensor
               </Typography>
               <Typography className={classes.pos} variant="subtitle1">
-                Sensor suhu: Aktif
+                Sensor suhu: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
-                Sensor kelembaban: Aktif
+                Sensor kelembaban: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
-                Sensor cahaya: Aktif
+                Sensor cahaya: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
-                Sensor angin: Aktif
+                Sensor angin: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
               </Typography>
             </CardContent>
