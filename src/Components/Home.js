@@ -84,7 +84,12 @@ function Home() {
                   title="Feature 1"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h6" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    style={{ color: "green" }}
+                  >
                     Real-time Monitoring
                   </Typography>
                   <Typography
@@ -108,7 +113,12 @@ function Home() {
                   title="Feature 2"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h6" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    style={{ color: "green" }}
+                  >
                     Prediction
                   </Typography>
                   <Typography
@@ -132,7 +142,12 @@ function Home() {
                   title="Feature 3"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h6" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    style={{ color: "green" }}
+                  >
                     Recommendation
                   </Typography>
                   <Typography

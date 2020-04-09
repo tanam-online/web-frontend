@@ -11,9 +11,8 @@ function NotFound() {
         <Grid container item xs={12} justify="center" alignItems="center">
           <img src={NotFoundImage} alt="Not Found" contain width="100%" />
           <h5>
-            Waduh, nyasar tong! 
-            Kalem, mangga balik ke&nbsp;
-            <MUILink  component={Link} style={{ color: "green" }} to="/">
+            Waduh, nyasar tong! Kalem, mangga balik ke&nbsp;
+            <MUILink component={Link} style={{ color: "green" }} to="/">
               Homepage
             </MUILink>
           </h5>

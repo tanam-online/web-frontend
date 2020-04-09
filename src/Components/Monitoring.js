@@ -168,7 +168,8 @@ function Monitoring() {
               <Typography className={classes.pos} variant="subtitle1">
                 Sensor suhu: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
-                Sensor kelembaban: <span style={{ color: "#41d76c" }}>Aktif</span>
+                Sensor kelembaban:{" "}
+                <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
                 Sensor cahaya: <span style={{ color: "#41d76c" }}>Aktif</span>
                 <br />
