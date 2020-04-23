@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import PropTypes from "prop-types"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
+import { useCookies } from "react-cookie"
 import Logo from "../Assets/logo.png"
 
 function ElevationScroll(props) {
@@ -35,15 +36,23 @@ ElevationScroll.propTypes = {
 }
 
 function HeaderComponent(props) {
+  const [cookies, setCookie, removeCookie] = useCookies(["userCookie"])
+
   const history = useHistory()
 
   const handleLogout = event => {
     event.preventDefault()
-    document.cookie = `id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    document.cookie = `nama=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    document.cookie = `email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    document.cookie = `role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    document.cookie = `no_telepon=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    console.log(cookies, setCookie)
+    removeCookie("id", { path: "/" })
+    removeCookie("nama", { path: "/" })
+    removeCookie("email", { path: "/" })
+    removeCookie("role", { path: "/" })
+    removeCookie("no_telepon", { path: "/" })
+    // document.cookie = `id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    // document.cookie = `nama=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    // document.cookie = `email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    // document.cookie = `role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    // document.cookie = `no_telepon=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
     history.push("/")
   }
 

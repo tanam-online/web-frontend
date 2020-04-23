@@ -13,12 +13,14 @@ import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
 import Swal from "sweetalert2"
 import axios from "axios"
+import { useCookies } from "react-cookie"
 import API from "../config"
 
 export default function LoginDosen() {
   const [state, setState] = React.useState({
     showPassword: false
   })
+  const [cookies, setCookie] = useCookies(["userCookie"])
 
   const handleChange = prop => event => {
     setState({ ...state, [prop]: event.target.value })
@@ -44,6 +46,7 @@ export default function LoginDosen() {
     e.preventDefault()
     if (state.email) {
       if (state.password) {
+        console.log(cookies)
         const payload = {
           email: state.email,
           password: state.password
@@ -53,11 +56,18 @@ export default function LoginDosen() {
           .then(response => {
             console.log(response)
             if (response.data.data && response.data.data.length > 0) {
-              document.cookie = `id=${response.data.data[0].id}; path=/`
-              document.cookie = `nama=${response.data.data[0].nama}; path=/`
-              document.cookie = `email=${response.data.data[0].email}; path=/`
-              document.cookie = `role=${response.data.data[0].role}; path=/`
-              document.cookie = `no_telepon=${response.data.data[0].no_telepon}; path=/`
+              setCookie("id", response.data.data[0].id, { path: "/" })
+              setCookie("nama", response.data.data[0].nama, { path: "/" })
+              setCookie("email", response.data.data[0].email, { path: "/" })
+              setCookie("role", response.data.data[0].role, { path: "/" })
+              setCookie("no_telepon", response.data.data[0].no_telepon, {
+                path: "/"
+              })
+              // document.cookie = `id=${response.data.data[0].id}; path=/`
+              // document.cookie = `nama=${response.data.data[0].nama}; path=/`
+              // document.cookie = `email=${response.data.data[0].email}; path=/`
+              // document.cookie = `role=${response.data.data[0].role}; path=/`
+              // document.cookie = `no_telepon=${response.data.data[0].no_telepon}; path=/`
               history.push("/manage-land")
             } else {
               Swal.fire("Gagal!", "Email atau password salah", "error")
