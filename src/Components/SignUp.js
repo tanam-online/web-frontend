@@ -17,7 +17,8 @@ import API from "../config"
 
 export default function LoginDosen() {
   const [state, setState] = React.useState({
-    showPassword: false
+    showPassword: false,
+    loading: false
   })
 
   const handleChange = prop => event => {
@@ -42,6 +43,7 @@ export default function LoginDosen() {
   const history = useHistory()
   const handleSubmit = e => {
     e.preventDefault()
+    setState({ ...state, loading: true })
     if (state.email && state.password && state.nama && state.no_telepon) {
       const payload = {
         email: state.email,
@@ -55,16 +57,20 @@ export default function LoginDosen() {
         .then(response => {
           console.log(response)
           if (response.data.data && response.data.data.length > 0) {
+            setState({ ...state, loading: false })
             history.push("/login")
           } else {
+            setState({ ...state, loading: false })
             Swal.fire("Gagal!", "Ada yang error nih", "error")
           }
         })
         .catch(error => {
           console.log(error)
+          setState({ ...state, loading: false })
           Swal.fire("Gagal!", error, "error")
         })
     } else {
+      setState({ ...state, loading: false })
       Swal.fire("Oops!", "Tolong isi semua data terlebih dahulu", "error")
     }
   }
@@ -149,8 +155,9 @@ export default function LoginDosen() {
                 fullWidth
                 style={{ color: "green", textTransform: "none" }}
                 type="submit"
+                disabled={state.loading}
               >
-                Buat Akun
+                {state.loading ? "Mohon tunggu" : "Buat Akun"}
               </Button>
             </Grid>
           </Grid>

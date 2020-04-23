@@ -1,182 +1,131 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
-import Link from "@material-ui/core/Link"
+import MaterialTable from "material-table"
 import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import Typography from "@material-ui/core/Typography"
-import Breadcrumbs from "@material-ui/core/Breadcrumbs"
-import NavigateNextIcon from "@material-ui/icons/NavigateNext"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import { makeStyles } from "@material-ui/core/styles"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
-import axios from "axios"
 import Swal from "sweetalert2"
+import axios from "axios"
+import { useCookies } from "react-cookie"
 import API from "../config"
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    minWidth: 300,
-    fullWidth: true
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-}))
-
-export default function ManageLand() {
-  const classes = useStyles()
-
-  const [role, setRole] = React.useState("")
-  const [state, setState] = React.useState()
-
-  const handleInputChange = e =>
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
-
-  function handleChangeRole(event) {
-    setRole(event.target.value)
-  }
+const ManageLand = () => {
+  const [userCookies] = useCookies(["userCookie"])
+  const [lands, setLands] = React.useState([])
+  const [loadingData, setLoadingData] = React.useState(true)
+  const [state, setState] = React.useState({
+    columns: [
+      { title: "ID Lahan", field: "id" },
+      { title: "Nama", field: "nama" },
+      { title: "Deskripsi", field: "deskripsi" },
+      { title: "Tanaman", field: "tanaman" },
+      { title: "Dibuat pada", field: "created_at" }
+    ]
+    // data: [],
+  })
 
   React.useEffect(() => {
-    console.log("hehe")
-  }, [state])
-
-  const handleSubmit = async event => {
-    event.preventDefault()
-    Swal.fire({
-      title: "Buat baru?",
-      text: "Pastikan data sudah terisi dengan benar",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Buat",
-      cancelButtonText: "Batal"
-    }).then(async result => {
-      if (result.value) {
-        const payload = {
-          user_id: state.user_id,
-          email: state.email,
-          name: state.name,
-          role
-        }
-        await axios
-          .post(`${API}/auth/register`, payload)
-          .then(() => {
-            Swal.fire("Tersimpan!", "Akun berhasil dibuat.", "success")
-          })
-          .catch(error => {
-            Swal.fire("Gagal!", error, "error")
-          })
-      }
-    })
-  }
+    console.log(userCookies)
+    async function fetchDataLandsByUser() {
+      await axios
+        .get(`${API.land}/lands/by-user/${userCookies.id}`)
+        .then(response => {
+          console.log(response)
+          if (response.data.data && response.data.data.length > 0) {
+            setLoadingData(false)
+            setLands(response.data.data)
+            // setState({ ...state, data: response.data.data })
+          } else {
+            console.log("no data")
+            setLoadingData(false)
+            Swal.fire("Gagal!", "Anda belum mendaftarkan lahan", "error")
+          }
+        })
+        .catch(error => {
+          console.log("error")
+          Swal.fire("Gagal!", error, "error")
+        })
+    }
+    fetchDataLandsByUser()
+  }, [userCookies])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Breadcrumbs
-              separator={<NavigateNextIcon fontSize="small" />}
-              aria-label="breadcrumb"
-            >
-              <Link color="inherit" href="/dashboard">
-                Dashboard
-              </Link>
-              <Link color="inherit" href="/kelola-akun">
-                Kelola Akun
-              </Link>
-              <Typography color="textPrimary">Buat Akun Baru</Typography>
-            </Breadcrumbs>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h4" gutterBottom>
-              Buat Lahan Baru
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              label="Nama"
-              name="name"
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <TextField
-              label="NIP / ID"
-              name="user_id"
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <TextField
-              label="Email"
-              name="email"
-              onChange={handleInputChange}
-              variant="outlined"
-              fullWidth
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl
-              variant="outlined"
-              required
-              className={classes.formControl}
-            >
-              <InputLabel id="demo-simple-select-label">Peran</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                value={role}
-                onChange={handleChangeRole}
-              >
-                <MenuItem value="" disabled>
-                  Pilih Peran
-                </MenuItem>
-                <MenuItem value={1}>Super admin</MenuItem>
-                <MenuItem value={2}>Admin akademik</MenuItem>
-                <MenuItem value={3}>Admin non-akademik</MenuItem>
-                <MenuItem value={4}>Tenaga pendidik</MenuItem>
-                <MenuItem value={5}>Dosen</MenuItem>
-                <MenuItem value={6}>Kepala program studi</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={2}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth
-                  href="/kelola-akun"
-                >
-                  Batal
-                </Button>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  color="primary"
-                  fullWidth
-                >
-                  Buat
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
+    <Grid container spacing={3} justify="center">
+      <Grid
+        container
+        item
+        spacing={3}
+        alignItems="center"
+        alignContent="center"
+        justify="center"
+        xs={12}
+      >
+        <Grid item xs={12} md={9}>
+          <Button
+            component={Link}
+            to="/manage-land/create-land"
+            color="inherit"
+            variant="outlined"
+            style={{ color: "green", textTransform: "none" }}
+            fullWidth
+          >
+            Buat Lahan Baru
+          </Button>
         </Grid>
-      </form>
-    </div>
+      </Grid>
+      <br />
+      <Grid container item spacing={3} xs={12}>
+        <Grid item xs={12}>
+          <MaterialTable
+            title={
+              loadingData
+                ? "List Lahan (Mohon tunggu, sedang mengambil data...)"
+                : "List Lahan"
+            }
+            columns={state.columns}
+            data={lands}
+            actions={[
+              {
+                icon: "delete",
+                tooltip: "Delete",
+                onClick: (event, rowData) => {
+                  event.preventDefault()
+                  Swal.fire({
+                    title: `Hapus lahan ${rowData.nama}?`,
+                    text: "Lahan akan dihapus secara permanen",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal"
+                  }).then(async result => {
+                    if (result.value) {
+                      await axios
+                        .delete(`${API.land}/lands/${rowData.id}`)
+                        .then(() => {
+                          Swal.fire(
+                            "Berhasil!",
+                            "Lahan berhasil dihapus.",
+                            "success"
+                          )
+                          setState({
+                            ...state,
+                            data: state.data.filter(el => {
+                              return el.id !== rowData.id
+                            })
+                          })
+                        })
+                        .catch(error => {
+                          Swal.fire("Gagal!", error, "error")
+                        })
+                    }
+                  })
+                }
+              }
+            ]}
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
+
+export default ManageLand

@@ -7,6 +7,7 @@ import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Home from "./Components/Home"
 import ManageLand from "./Components/ManageLand"
+import CreateLand from "./Components/CreateLand"
 import Monitoring from "./Components/Monitoring"
 /* 
 import Prediction from "./Components/Prediction"
@@ -27,8 +28,11 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/manage-land">
+              <Route exact path="/manage-land">
                 <ManageLand />
+              </Route>
+              <Route exact path="/manage-land/create-land">
+                <CreateLand />
               </Route>
               <Route path="/monitoring">
                 <Monitoring />

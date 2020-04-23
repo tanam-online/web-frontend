@@ -18,7 +18,8 @@ import API from "../config"
 
 export default function LoginDosen() {
   const [state, setState] = React.useState({
-    showPassword: false
+    showPassword: false,
+    loading: false
   })
   const [cookies, setCookie] = useCookies(["userCookie"])
 
@@ -44,6 +45,7 @@ export default function LoginDosen() {
   const history = useHistory()
   const handleSubmit = e => {
     e.preventDefault()
+    setState({ ...state, loading: true })
     if (state.email) {
       if (state.password) {
         console.log(cookies)
@@ -63,6 +65,7 @@ export default function LoginDosen() {
               setCookie("no_telepon", response.data.data[0].no_telepon, {
                 path: "/"
               })
+              setState({ ...state, loading: false })
               // document.cookie = `id=${response.data.data[0].id}; path=/`
               // document.cookie = `nama=${response.data.data[0].nama}; path=/`
               // document.cookie = `email=${response.data.data[0].email}; path=/`
@@ -70,17 +73,21 @@ export default function LoginDosen() {
               // document.cookie = `no_telepon=${response.data.data[0].no_telepon}; path=/`
               history.push("/manage-land")
             } else {
+              setState({ ...state, loading: false })
               Swal.fire("Gagal!", "Email atau password salah", "error")
             }
           })
           .catch(error => {
+            setState({ ...state, loading: false })
             console.log(error)
             Swal.fire("Gagal!", error, "error")
           })
       } else {
+        setState({ ...state, loading: false })
         Swal.fire("Oops!", "Tolong isi password anda", "error")
       }
     } else {
+      setState({ ...state, loading: false })
       Swal.fire("Oops!", "Tolong isi email anda", "error")
     }
   }
@@ -145,8 +152,9 @@ export default function LoginDosen() {
                 fullWidth
                 style={{ color: "green", textTransform: "none" }}
                 type="submit"
+                disabled={state.loading}
               >
-                Masuk
+                {state.loading ? "Mohon tunggu..." : "Masuk"}
               </Button>
             </Grid>
           </Grid>

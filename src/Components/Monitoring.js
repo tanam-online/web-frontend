@@ -42,9 +42,8 @@ const useStyles = makeStyles(theme => ({
 
 function Monitoring() {
   const [userCookies] = useCookies(["userCookie"])
-  const [state, setState] = React.useState({
-    lands: []
-  })
+  const [lands, setLands] = React.useState([])
+  const [loadingSelect, setLoadingSelect] = React.useState(true)
 
   const [land, setLand] = React.useState("")
   function handleChangeLand(event) {
@@ -57,10 +56,12 @@ function Monitoring() {
         .get(`${API.land}/lands/by-user/${userCookies.id}`)
         .then(response => {
           if (response.data.data && response.data.data.length > 0) {
-            setState({ lands: response.data.data })
+            setLoadingSelect(false)
+            setLands(response.data.data)
           } else {
             console.log("no data")
-            Swal.fire("Gagal!", "error", "error")
+            setLoadingSelect(false)
+            Swal.fire("Gagal!", "Anda belum mendaftarkan lahan", "error")
           }
         })
         .catch(error => {
@@ -299,8 +300,11 @@ function Monitoring() {
                   variant="outlined"
                   required
                   className={classes.formControl}
+                  disabled={loadingSelect}
                 >
-                  <InputLabel id="land-select-label">Lahan</InputLabel>
+                  <InputLabel id="land-select-label">
+                    {loadingSelect ? "Mohon tunggu sebentar..." : "Pilih Lahan"}
+                  </InputLabel>
                   <Select
                     labelId="land-select-label"
                     value={land}
@@ -309,7 +313,7 @@ function Monitoring() {
                     <MenuItem value="" disabled>
                       Pilih Lahan
                     </MenuItem>
-                    {state.lands.map(oneLand => {
+                    {lands.map(oneLand => {
                       return (
                         <MenuItem key={oneLand.id} value={oneLand.id}>
                           {oneLand.nama}
