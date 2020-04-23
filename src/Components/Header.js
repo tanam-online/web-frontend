@@ -35,17 +35,17 @@ ElevationScroll.propTypes = {
 }
 
 function HeaderComponent(props) {
-  let history = useHistory()
+  const history = useHistory()
 
   const handleLogout = event => {
-    event.preventDefault();
-    document.cookie = `id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    document.cookie = `nama=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    document.cookie = `email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    document.cookie = `role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    document.cookie = `no_telepon=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    event.preventDefault()
+    document.cookie = `id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    document.cookie = `nama=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    document.cookie = `email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    document.cookie = `role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
+    document.cookie = `no_telepon=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
     history.push("/")
-  };
+  }
 
   const { path } = props
 

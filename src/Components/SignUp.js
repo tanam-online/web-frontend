@@ -39,17 +39,16 @@ export default function LoginDosen() {
     })
   }
 
-  let history = useHistory()
+  const history = useHistory()
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(state)
     if (state.email && state.password && state.nama && state.no_telepon) {
       const payload = {
         email: state.email,
         password: state.password,
         nama: state.nama,
         no_telepon: state.no_telepon,
-        role: 'customer'
+        role: "customer"
       }
       axios
         .post(`${API.user}/users`, payload)

@@ -39,7 +39,7 @@ export default function LoginDosen() {
     })
   }
 
-  let history = useHistory()
+  const history = useHistory()
   const handleSubmit = e => {
     e.preventDefault()
     if (state.email) {
