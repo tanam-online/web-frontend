@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Home from "./Components/Home"
+import ManageLand from "./Components/ManageLand"
 import Monitoring from "./Components/Monitoring"
 /* 
 import Prediction from "./Components/Prediction"
@@ -25,6 +26,9 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="/manage-land">
+                <ManageLand />
               </Route>
               <Route path="/monitoring">
                 <Monitoring />

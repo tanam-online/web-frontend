@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import MUILink from "@material-ui/core/Link"
 import Button from "@material-ui/core/Button"
@@ -39,26 +39,28 @@ export default function LoginDosen() {
     })
   }
 
+  let history = useHistory()
   const handleSubmit = e => {
     e.preventDefault()
-    if (state.nip) {
+    if (state.email) {
       if (state.password) {
-        const formData = new FormData()
-        formData.append("id", state.nip)
-        formData.append("password", state.password)
+        const payload = {
+          email: state.email,
+          password: state.password
+        }
         axios
-          .post(`${API}/auth/login/alternative/lecturer`, formData)
+          .post(`${API.user}/login`, payload)
           .then(response => {
             console.log(response)
-            if (response.data.results) {
-              document.cookie = `id=${response.data.results.id}; path=/`
-              document.cookie = `name=${response.data.results.name}; path=/`
-              document.cookie = `role=${response.data.results.role}; path=/`
-              document.cookie = `user_id=${response.data.results.nip}; path=/`
-              document.cookie = `email=${response.data.results.email}; path=/`
-              window.location = "/dashboard"
+            if (response.data.data && response.data.data.length > 0) {
+              document.cookie = `id=${response.data.data[0].id}; path=/`
+              document.cookie = `nama=${response.data.data[0].nama}; path=/`
+              document.cookie = `email=${response.data.data[0].email}; path=/`
+              document.cookie = `role=${response.data.data[0].role}; path=/`
+              document.cookie = `no_telepon=${response.data.data[0].no_telepon}; path=/`
+              history.push("/manage-land")
             } else {
-              Swal.fire("Gagal!", "ID atau password salah", "error")
+              Swal.fire("Gagal!", "Email atau password salah", "error")
             }
           })
           .catch(error => {
@@ -69,7 +71,7 @@ export default function LoginDosen() {
         Swal.fire("Oops!", "Tolong isi password anda", "error")
       }
     } else {
-      Swal.fire("Oops!", "Tolong isi NIP anda", "error")
+      Swal.fire("Oops!", "Tolong isi email anda", "error")
     }
   }
 
@@ -128,12 +130,11 @@ export default function LoginDosen() {
           <Grid item xs={12}>
             <Grid item xs={12} md={5}>
               <Button
-                component={Link}
                 color="inherit"
                 variant="outlined"
-                to="/monitoring"
                 fullWidth
                 style={{ color: "green", textTransform: "none" }}
+                type="submit"
               >
                 Masuk
               </Button>

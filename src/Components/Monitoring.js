@@ -27,6 +27,9 @@ const useStyles = makeStyles({
 
 function Monitoring() {
   const classes = useStyles()
+  // Ambil 10 (kalau data >= 10)
+  // ex label -> convert(timestamp) to date
+  // ex 100 -> floor(100/3), floor(100/3*2), floor(100/3*3)
   const dataSuhu = {
     labels: ["Jan", "Feb", "March", "April", "May", "June"],
     datasets: [
@@ -113,6 +116,9 @@ function Monitoring() {
             Waktu Selesai
           </Button>
         </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <p>Lahan X, tanggal 1 Maret 2020 - 30 Juni 2020</p>
       </Grid>
       <Grid container spacing={3} item xs={12}>
         <Grid item xs={12} md={3}>
