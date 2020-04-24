@@ -6,7 +6,7 @@ import Container from "@material-ui/core/Container"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Home from "./Components/Home"
-import ManageLand from "./Components/ManageLand"
+import Manage from "./Components/Manage"
 import CreateLand from "./Components/CreateLand"
 import Monitoring from "./Components/Monitoring"
 /* 
@@ -28,10 +28,10 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path="/manage-land">
-                <ManageLand />
+              <Route exact path="/manage">
+                <Manage />
               </Route>
-              <Route exact path="/manage-land/create-land">
+              <Route exact path="/manage/create-land">
                 <CreateLand />
               </Route>
               <Route path="/monitoring">

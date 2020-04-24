@@ -8,20 +8,17 @@ import axios from "axios"
 import { useCookies } from "react-cookie"
 import API from "../config"
 
-const ManageLand = () => {
+const Manage = () => {
   const [userCookies] = useCookies(["userCookie"])
   const [lands, setLands] = React.useState([])
   const [loadingData, setLoadingData] = React.useState(true)
-  const [state, setState] = React.useState({
-    columns: [
-      { title: "ID Lahan", field: "id" },
-      { title: "Nama", field: "nama" },
-      { title: "Deskripsi", field: "deskripsi" },
-      { title: "Tanaman", field: "tanaman" },
-      { title: "Dibuat pada", field: "created_at" }
-    ]
-    // data: [],
-  })
+  const columns = [
+    { title: "ID Lahan", field: "id" },
+    { title: "Nama", field: "nama" },
+    { title: "Deskripsi", field: "deskripsi" },
+    { title: "Tanaman", field: "tanaman" },
+    { title: "Dibuat pada", field: "created_at" }
+  ]
 
   React.useEffect(() => {
     console.log(userCookies)
@@ -37,12 +34,11 @@ const ManageLand = () => {
           } else {
             console.log("no data")
             setLoadingData(false)
-            Swal.fire("Gagal!", "Anda belum mendaftarkan lahan", "error")
           }
         })
         .catch(error => {
-          console.log("error")
-          Swal.fire("Gagal!", error, "error")
+          console.log(error)
+          // Swal.fire("Gagal!", error, "error")
         })
     }
     fetchDataLandsByUser()
@@ -81,7 +77,7 @@ const ManageLand = () => {
                 ? "List Lahan (Mohon tunggu, sedang mengambil data...)"
                 : "List Lahan"
             }
-            columns={state.columns}
+            columns={columns}
             data={lands}
             actions={[
               {
@@ -91,7 +87,7 @@ const ManageLand = () => {
                   event.preventDefault()
                   Swal.fire({
                     title: `Hapus lahan ${rowData.nama}?`,
-                    text: "Lahan akan dihapus secara permanen",
+                    text: "Lahan dan data terkait akan dihapus secara permanen",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonText: "Hapus",
@@ -100,21 +96,24 @@ const ManageLand = () => {
                     if (result.value) {
                       await axios
                         .delete(`${API.land}/lands/${rowData.id}`)
-                        .then(() => {
-                          Swal.fire(
-                            "Berhasil!",
-                            "Lahan berhasil dihapus.",
-                            "success"
-                          )
-                          setState({
-                            ...state,
-                            data: state.data.filter(el => {
-                              return el.id !== rowData.id
-                            })
-                          })
+                        .then(response => {
+                          if (response.status === 200) {
+                            Swal.fire(
+                              "Berhasil!",
+                              "Lahan berhasil dihapus.",
+                              "success"
+                            )
+                            setLands(
+                              lands.filter(el => {
+                                return el.id !== rowData.id
+                              })
+                            )
+                          } else {
+                            Swal.fire("Gagal!", "error")
+                          }
                         })
                         .catch(error => {
-                          Swal.fire("Gagal!", error, "error")
+                          console.log(error)
                         })
                     }
                   })
@@ -128,4 +127,4 @@ const ManageLand = () => {
   )
 }
 
-export default ManageLand
+export default Manage

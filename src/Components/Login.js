@@ -71,16 +71,19 @@ export default function LoginDosen() {
               // document.cookie = `email=${response.data.data[0].email}; path=/`
               // document.cookie = `role=${response.data.data[0].role}; path=/`
               // document.cookie = `no_telepon=${response.data.data[0].no_telepon}; path=/`
-              history.push("/manage-land")
+              history.push("/manage")
             } else {
               setState({ ...state, loading: false })
-              Swal.fire("Gagal!", "Email atau password salah", "error")
+              Swal.fire("Gagal!", "error")
             }
           })
           .catch(error => {
             setState({ ...state, loading: false })
-            console.log(error)
-            Swal.fire("Gagal!", error, "error")
+            if (error.response.data.message === "Wrong password") {
+              Swal.fire("Gagal!", "Email atau password salah", "error")
+            } else {
+              Swal.fire("Gagal!", error, "error")
+            }
           })
       } else {
         setState({ ...state, loading: false })

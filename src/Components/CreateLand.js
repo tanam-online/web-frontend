@@ -64,8 +64,8 @@ export default function CreateLand() {
               separator={<NavigateNextIcon fontSize="small" />}
               aria-label="breadcrumb"
             >
-              <MUILink component={Link} color="inherit" to="/manage-land">
-                Manage Land
+              <MUILink component={Link} color="inherit" to="/manage">
+                Manage
               </MUILink>
               <Typography color="textPrimary">Create</Typography>
             </Breadcrumbs>

@@ -62,12 +62,13 @@ function HeaderComponent(props) {
     <div style={{ flexGrow: 1 }}>
       <ElevationScroll props={props}>
         <AppBar position="fixed" color="white">
-          {path !== "/" && path !== "/login" && path !== "/sign-up" ? (
+          {path === "/monitoring" || path === "/prediction" || path === "/recommendation"
+            || path === "/manage" || path === "/manage/create-land" || path === "/manage/create-harvest"
+            || path === "/manage/create-activity" || path === "/account" ? (
             <Toolbar>
               <IconButton
                 edge="start"
                 color="inherit"
-                to="/"
                 aria-label="menu"
                 style={{ spacing: 2 }}
               >
@@ -108,9 +109,9 @@ function HeaderComponent(props) {
               </Button>
               <Button
                 component={Link}
-                to="/manage-land"
+                to="/manage"
                 color="inherit"
-                variant={path === "/manage-land" ? "outlined" : "text"}
+                variant={path === "/manage" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
               >
                 Manage Land
