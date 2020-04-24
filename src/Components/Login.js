@@ -79,7 +79,7 @@ export default function LoginDosen() {
           })
           .catch(error => {
             setState({ ...state, loading: false })
-            if (error.response.data.message === "Wrong password") {
+            if (error.response.data.status === 400) {
               Swal.fire("Gagal!", "Email atau password salah", "error")
             } else {
               Swal.fire("Gagal!", error, "error")

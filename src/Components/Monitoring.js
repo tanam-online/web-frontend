@@ -44,11 +44,70 @@ function Monitoring() {
   const [userCookies] = useCookies(["userCookie"])
   const [lands, setLands] = React.useState([])
   const [loadingSelect, setLoadingSelect] = React.useState(true)
-
+  const [timeStart, setTimeStart] = React.useState(new Date().toDateString())
+  const [timeEnd, setTimeEnd] = React.useState(new Date().toDateString())
   const [land, setLand] = React.useState("")
-  function handleChangeLand(event) {
-    setLand(event.target.value)
+  const [average, setAverage] = React.useState({
+    suhu: "Loading...",
+    kelembaban: "Loading...",
+    cahaya: "Loading...",
+    angin: "Loading...",
+    cuaca: "Loading..."
+  })
+  const [sensorData, setSensorData] = React.useState({
+    suhu: [],
+    kelembaban: [],
+    cahaya: [],
+    angin: [],
+    waktu: []
+  })
+
+  const handleChangeLand = event => {
+    setLand(lands[event.target.value])
   }
+
+  const handleDownload = event => {
+    event.preventDefault()
+    window.open(`${API.report}/download/${land.id}`, "_blank")
+  }
+
+  React.useEffect(() => {
+    async function fetchDataRealTimeByLand() {
+      await axios
+        .get(`${API.dashboard}/real-time/${land.id}`)
+        .then(response => {
+          console.log(response)
+          if (response.data.data) {
+            setAverage(response.data.data.average)
+            response.data.data.sensor_data.forEach(item => {
+              setSensorData(prev => ({
+                suhu: [...prev.suhu, item.suhu],
+                kelembaban: [...prev.kelembaban, item.kelembaban],
+                cahaya: [...prev.cahaya, item.cahaya],
+                angin: [...prev.angin, item.angin],
+                waktu: [
+                  ...prev.waktu,
+                  new Date(item.waktu).toLocaleTimeString()
+                ]
+              }))
+            })
+          }
+        })
+        .catch(error => {
+          setAverage({
+            suhu: "Belum ada input data",
+            kelembaban: "Belum ada input data",
+            cahaya: "Belum ada input data",
+            angin: "Belum ada input data",
+            cuaca: "Belum ada input data"
+          })
+          console.log(error.response)
+        })
+    }
+    if (land) {
+      fetchDataRealTimeByLand()
+    }
+  }, [land])
 
   React.useEffect(() => {
     async function fetchDataLandsByUser() {
@@ -65,53 +124,53 @@ function Monitoring() {
           }
         })
         .catch(error => {
-          console.log("error")
-          Swal.fire("Gagal!", error, "error")
+          console.log(error.response)
+          // Swal.fire("Gagal!", error, "error")
         })
     }
     fetchDataLandsByUser()
-  }, [userCookies])
+  }, [userCookies.id])
 
   const classes = useStyles()
   // Ambil 10 (kalau data >= 10)
   // ex label -> convert(timestamp) to date
   // ex 100 -> floor(100/3), floor(100/3*2), floor(100/3*3)
   const dataSuhu = {
-    labels: ["Jan", "Feb", "March", "April", "May", "June"],
+    labels: sensorData.waktu,
     datasets: [
       {
         label: "Suhu",
-        data: [86, 67, 91, 24, 24, 65],
+        data: sensorData.suhu,
         backgroundColor: "#71F79F"
       }
     ]
   }
   const dataKelembaban = {
-    labels: ["Jan", "Feb", "March", "April", "May", "June"],
+    labels: sensorData.waktu,
     datasets: [
       {
         label: "Kelembaban",
-        data: [86, 67, 91, 54, 12, 43],
+        data: sensorData.kelembaban,
         backgroundColor: "#3DD6D0"
       }
     ]
   }
   const dataCahaya = {
-    labels: ["Jan", "Feb", "March", "April", "May", "June"],
+    labels: sensorData.waktu,
     datasets: [
       {
         label: "Cahaya",
-        data: [86, 67, 91, 54, 54, 78],
+        data: sensorData.cahaya,
         backgroundColor: "#15B097"
       }
     ]
   }
   const dataAngin = {
-    labels: ["Jan", "Feb", "March", "April", "May", "June"],
+    labels: sensorData.waktu,
     datasets: [
       {
         label: "Angin",
-        data: [86, 67, 91, 54, 65, 23],
+        data: sensorData.angin,
         backgroundColor: "#A8C9C9"
       }
     ]
@@ -124,7 +183,8 @@ function Monitoring() {
             <Grid item xs={12} md={4}>
               <h1 style={{ color: "green" }}>Dashboard Monitoring</h1>
               <h3 style={{ color: "#41d76c" }}>
-                Lahan X, 1 Maret 2020 - 30 Juni 2020
+                {land.nama},{" "}
+                {timeStart === timeEnd ? timeStart : timeStart - timeEnd}
               </h3>
             </Grid>
             <Grid item xs={12} md={2}>
@@ -133,6 +193,7 @@ function Monitoring() {
                 variant="outlined"
                 fullWidth
                 style={{ color: "green", textTransform: "none" }}
+                onClick={handleDownload}
               >
                 Unduh Laporan
               </Button>
@@ -186,7 +247,7 @@ function Monitoring() {
                     variant="subtitle1"
                     component="h2"
                   >
-                    <span style={{ color: "#41d76c" }}>Cerah</span>
+                    <span style={{ color: "#41d76c" }}>{average.cuaca}</span>
                   </Typography>
                   <hr />
                   <Typography
@@ -202,13 +263,25 @@ function Monitoring() {
                     variant="subtitle1"
                     component="h2"
                   >
-                    Suhu: <span style={{ color: "#41d76c" }}>10 &deg;C</span>
+                    Suhu:{" "}
+                    <span style={{ color: "#41d76c" }}>
+                      {average.suhu.replace(".", ",")} &deg;C
+                    </span>
                     <br />
-                    Kelembaban: <span style={{ color: "#41d76c" }}>43%</span>
+                    Kelembaban:{" "}
+                    <span style={{ color: "#41d76c" }}>
+                      {average.kelembaban.replace(".", ",")}%
+                    </span>
                     <br />
-                    Cahaya: <span style={{ color: "#41d76c" }}>33 Cd</span>
+                    Cahaya:{" "}
+                    <span style={{ color: "#41d76c" }}>
+                      {average.cahaya.replace(".", ",")} Cd
+                    </span>
                     <br />
-                    Angin: <span style={{ color: "#41d76c" }}>2.54 m/s</span>
+                    Angin:{" "}
+                    <span style={{ color: "#41d76c" }}>
+                      {average.angin.replace(".", ",")} m/s
+                    </span>
                     <br />
                   </Typography>
                   <hr />
@@ -313,9 +386,9 @@ function Monitoring() {
                     <MenuItem value="" disabled>
                       Pilih Lahan
                     </MenuItem>
-                    {lands.map(oneLand => {
+                    {lands.map((oneLand, index) => {
                       return (
-                        <MenuItem key={oneLand.id} value={oneLand.id}>
+                        <MenuItem key={oneLand.id} value={index}>
                           {oneLand.nama}
                         </MenuItem>
                       )

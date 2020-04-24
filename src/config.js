@@ -6,4 +6,12 @@ const API = {
   dashboard: "https://api-dashboard-tanam.herokuapp.com"
 }
 
+/* const API = {
+  user: "http://localhost:5000",
+  land: "http://localhost:4004",
+  sensor: "",
+  report: "http://localhost:6001",
+  dashboard: "http://localhost:4000"
+} */
+
 export default API

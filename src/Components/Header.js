@@ -62,9 +62,14 @@ function HeaderComponent(props) {
     <div style={{ flexGrow: 1 }}>
       <ElevationScroll props={props}>
         <AppBar position="fixed" color="white">
-          {path === "/monitoring" || path === "/prediction" || path === "/recommendation"
-            || path === "/manage" || path === "/manage/create-land" || path === "/manage/create-harvest"
-            || path === "/manage/create-activity" || path === "/account" ? (
+          {path === "/monitoring" ||
+          path === "/prediction" ||
+          path === "/recommendation" ||
+          path === "/manage" ||
+          path === "/manage/create-land" ||
+          path === "/manage/create-harvest" ||
+          path === "/manage/create-activity" ||
+          path === "/account" ? (
             <Toolbar>
               <IconButton
                 edge="start"
@@ -114,7 +119,7 @@ function HeaderComponent(props) {
                 variant={path === "/manage" ? "outlined" : "text"}
                 style={{ color: "#41d76c", textTransform: "none" }}
               >
-                Manage Land
+                Manage
               </Button>
               <Button
                 component={Link}

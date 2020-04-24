@@ -28,6 +28,9 @@ const Manage = () => {
         .then(response => {
           console.log(response)
           if (response.data.data && response.data.data.length > 0) {
+            response.data.data.forEach(item => {
+              item.created_at = new Date(item.created_at).toLocaleString()
+            })
             setLoadingData(false)
             setLands(response.data.data)
             // setState({ ...state, data: response.data.data })
@@ -58,7 +61,7 @@ const Manage = () => {
         <Grid item xs={12} md={9}>
           <Button
             component={Link}
-            to="/manage-land/create-land"
+            to="/manage/create-land"
             color="inherit"
             variant="outlined"
             style={{ color: "green", textTransform: "none" }}
