@@ -256,6 +256,7 @@ function Monitoring() {
                     "aria-label": "change date"
                   }}
                   InputProps={{ className: classes.input }}
+                  disableFuture
                 />
               </MuiPickersUtilsProvider>
             </Grid>

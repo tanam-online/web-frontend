@@ -9,9 +9,8 @@ import Home from "./Components/Home"
 import Manage from "./Components/Manage"
 import CreateLand from "./Components/CreateLand"
 import Monitoring from "./Components/Monitoring"
-/* 
 import Prediction from "./Components/Prediction"
-import Recommendation from "./Components/Recommendation"
+/* import Recommendation from "./Components/Recommendation"
 import Account from "./Components/Account" */
 import SignUp from "./Components/SignUp"
 import Login from "./Components/Login"
@@ -37,10 +36,10 @@ function App() {
               <Route path="/monitoring">
                 <Monitoring />
               </Route>
-              {/* 
               <Route path="/prediction">
                 <Prediction />
               </Route>
+              {/*
               <Route path="/recommendation">
                 <Recommendation />
               </Route>
