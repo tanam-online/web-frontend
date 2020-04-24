@@ -15,7 +15,7 @@ import Swal from "sweetalert2"
 import axios from "axios"
 import API from "../config"
 
-export default function LoginDosen() {
+export default function SignUp() {
   const [state, setState] = React.useState({
     showPassword: false,
     loading: false
