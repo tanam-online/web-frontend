@@ -49,7 +49,9 @@ function Prediction() {
   const [userCookies] = useCookies(["userCookie"])
   const [lands, setLands] = React.useState([])
   const [loadingSelect, setLoadingSelect] = React.useState(true)
-  const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now() + 1*24*60*60*1000))
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+  )
   const [land, setLand] = React.useState("")
   const [average, setAverage] = React.useState({
     suhu: "Loading...",
@@ -87,7 +89,7 @@ function Prediction() {
       return `${date}-${month}-${year}`
     }
 
-    async function fetchDataRealTimeByLand(date) {
+    async function fetchDataPredictionByLand(date) {
       await axios
         .get(`${API.dashboard}/prediction/${land.id}/${date}`)
         .then(response => {
@@ -131,7 +133,7 @@ function Prediction() {
         angin: [],
         waktu: []
       })
-      fetchDataRealTimeByLand(createDate())
+      fetchDataPredictionByLand(createDate())
     }
   }, [land, selectedDate])
 

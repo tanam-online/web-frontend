@@ -10,8 +10,8 @@ import Manage from "./Components/Manage"
 import CreateLand from "./Components/CreateLand"
 import Monitoring from "./Components/Monitoring"
 import Prediction from "./Components/Prediction"
-/* import Recommendation from "./Components/Recommendation"
-import Account from "./Components/Account" */
+import Recommendation from "./Components/Recommendation"
+import Account from "./Components/Account"
 import SignUp from "./Components/SignUp"
 import Login from "./Components/Login"
 import NotFound from "./Components/NotFound"
@@ -39,13 +39,12 @@ function App() {
               <Route path="/prediction">
                 <Prediction />
               </Route>
-              {/*
               <Route path="/recommendation">
                 <Recommendation />
               </Route>
               <Route path="/account">
                 <Account />
-              </Route> */}
+              </Route>
               <Route exact path="/sign-up">
                 <SignUp />
               </Route>
