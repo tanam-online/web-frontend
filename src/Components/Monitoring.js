@@ -10,6 +10,8 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import { makeStyles } from "@material-ui/core/styles"
 import { Line } from "react-chartjs-2"
+import DateFnsUtils from "@date-io/date-fns"
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers"
 import { useCookies } from "react-cookie"
 import Swal from "sweetalert2"
 import axios from "axios"
@@ -37,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
+  },
+  input: {
+    color: "green"
   }
 }))
 
@@ -44,8 +49,7 @@ function Monitoring() {
   const [userCookies] = useCookies(["userCookie"])
   const [lands, setLands] = React.useState([])
   const [loadingSelect, setLoadingSelect] = React.useState(true)
-  const [timeStart, setTimeStart] = React.useState(new Date().toDateString())
-  const [timeEnd, setTimeEnd] = React.useState(new Date().toDateString())
+  const [selectedDate, setSelectedDate] = React.useState(new Date())
   const [land, setLand] = React.useState("")
   const [average, setAverage] = React.useState({
     suhu: "Loading...",
@@ -66,15 +70,31 @@ function Monitoring() {
     setLand(lands[event.target.value])
   }
 
+  const handlePreChangeLand = event => {
+    event.preventDefault()
+    setLand(null)
+  }
+
+  const handleDateChange = date => {
+    setSelectedDate(date)
+  }
+
   const handleDownload = event => {
     event.preventDefault()
     window.open(`${API.report}/download/${land.id}`, "_blank")
   }
 
   React.useEffect(() => {
-    async function fetchDataRealTimeByLand() {
+    const createDate = () => {
+      const date = `0${selectedDate.getDate()}`.slice(-2)
+      const month = `0${selectedDate.getMonth() + 1}`.slice(-2)
+      const year = selectedDate.getFullYear()
+      return `${date}-${month}-${year}`
+    }
+
+    async function fetchDataRealTimeByLand(date) {
       await axios
-        .get(`${API.dashboard}/real-time/${land.id}`)
+        .get(`${API.dashboard}/real-time/${land.id}/${date}`)
         .then(response => {
           console.log(response)
           if (response.data.data) {
@@ -105,9 +125,23 @@ function Monitoring() {
         })
     }
     if (land) {
-      fetchDataRealTimeByLand()
+      setAverage({
+        suhu: "Loading...",
+        kelembaban: "Loading...",
+        cahaya: "Loading...",
+        angin: "Loading...",
+        cuaca: "Loading..."
+      })
+      setSensorData({
+        suhu: [],
+        kelembaban: [],
+        cahaya: [],
+        angin: [],
+        waktu: []
+      })
+      fetchDataRealTimeByLand(createDate())
     }
-  }, [land])
+  }, [land, selectedDate])
 
   React.useEffect(() => {
     async function fetchDataLandsByUser() {
@@ -139,7 +173,7 @@ function Monitoring() {
     labels: sensorData.waktu,
     datasets: [
       {
-        label: "Suhu",
+        label: "Suhu (C)",
         data: sensorData.suhu,
         backgroundColor: "#71F79F"
       }
@@ -149,7 +183,7 @@ function Monitoring() {
     labels: sensorData.waktu,
     datasets: [
       {
-        label: "Kelembaban",
+        label: "Kelembaban (%)",
         data: sensorData.kelembaban,
         backgroundColor: "#3DD6D0"
       }
@@ -159,7 +193,7 @@ function Monitoring() {
     labels: sensorData.waktu,
     datasets: [
       {
-        label: "Cahaya",
+        label: "Cahaya (Cd/m2)",
         data: sensorData.cahaya,
         backgroundColor: "#15B097"
       }
@@ -169,7 +203,7 @@ function Monitoring() {
     labels: sensorData.waktu,
     datasets: [
       {
-        label: "Angin",
+        label: "Angin (m/s)",
         data: sensorData.angin,
         backgroundColor: "#A8C9C9"
       }
@@ -183,11 +217,10 @@ function Monitoring() {
             <Grid item xs={12} md={4}>
               <h1 style={{ color: "green" }}>Dashboard Monitoring</h1>
               <h3 style={{ color: "#41d76c" }}>
-                {land.nama},{" "}
-                {timeStart === timeEnd ? timeStart : timeStart - timeEnd}
+                {land.nama}, sejak {selectedDate.toDateString()}
               </h3>
             </Grid>
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} md={3}>
               <Button
                 color="inherit"
                 variant="outlined"
@@ -198,36 +231,33 @@ function Monitoring() {
                 Unduh Laporan
               </Button>
             </Grid>
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} md={3}>
               <Button
                 color="inherit"
                 variant="outlined"
                 fullWidth
-                onClick={() => setLand(null)}
+                onClick={handlePreChangeLand}
                 style={{ color: "green", textTransform: "none" }}
               >
                 Pilih Lahan
               </Button>
             </Grid>
             <Grid item xs={12} md={2}>
-              <Button
-                color="inherit"
-                variant="outlined"
-                fullWidth
-                style={{ color: "green", textTransform: "none" }}
-              >
-                Waktu Mulai
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={2}>
-              <Button
-                color="inherit"
-                variant="outlined"
-                fullWidth
-                style={{ color: "green", textTransform: "none" }}
-              >
-                Waktu Selesai
-              </Button>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Pilih Waktu"
+                  format="dd/MM/yyyy"
+                  inputVariant="outlined"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+                  InputProps={{ className: classes.input }}
+                />
+              </MuiPickersUtilsProvider>
             </Grid>
           </Grid>
           <Grid container spacing={3} item xs={12}>
@@ -275,7 +305,7 @@ function Monitoring() {
                     <br />
                     Cahaya:{" "}
                     <span style={{ color: "#41d76c" }}>
-                      {average.cahaya.replace(".", ",")} Cd
+                      {average.cahaya.replace(".", ",")} Cd/m2
                     </span>
                     <br />
                     Angin:{" "}
