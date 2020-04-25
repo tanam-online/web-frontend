@@ -73,8 +73,8 @@ function HeaderComponent(props) {
       path === "/manage" ||
       path.slice(0, 5) === "/land" ||
       path === "/manage/create-land" ||
-      path === "/manage/create-harvest" ||
-      path === "/manage/create-activity" ||
+      path.slice(0, 22) === "/manage/create-harvest" ||
+      path.slice(0, 23) === "/manage/create-activity" ||
       path === "/account"
     ) {
       return (
@@ -223,8 +223,8 @@ function HeaderComponent(props) {
       path === "/manage" ||
       path.slice(0, 5) === "/land" ||
       path === "/manage/create-land" ||
-      path === "/manage/create-harvest" ||
-      path === "/manage/create-activity" ||
+      path.slice(0, 22) === "/manage/create-harvest" ||
+      path.slice(0, 23) === "/manage/create-activity" ||
       path === "/account"
     ) {
       return (
