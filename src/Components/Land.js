@@ -9,7 +9,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import Swal from "sweetalert2"
 import axios from "axios"
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
 import API from "../config"
 
 const Land = props => {
@@ -238,8 +238,8 @@ const Land = props => {
   )
 }
 
-Land.propTypes.shape({
-  match: PropTypes.object.isRequired
-})
+// Land.propTypes.shape({
+//   match: PropTypes.object.isRequired
+// })
 
 export default Land

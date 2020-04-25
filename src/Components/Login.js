@@ -164,7 +164,11 @@ export default function LoginDosen() {
           <Grid item xs={12}>
             <p>
               Lupa kata sandi?{" "}
-              <MUILink component={Link} style={{ color: "green" }} to="/reset">
+              <MUILink
+                component={Link}
+                style={{ color: "green" }}
+                to="/recover"
+              >
                 Reset
               </MUILink>
             </p>

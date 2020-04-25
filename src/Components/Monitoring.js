@@ -259,8 +259,9 @@ function Monitoring() {
                 fullWidth
                 style={{ color: "green", textTransform: "none" }}
                 onClick={handleSendMail}
+                disabled={loading}
               >
-                Kirim Email Laporan
+                {loading ? "Mohon tunggu..." : "Kirim Email Laporan"}
               </Button>
             </Grid>
             <Grid item xs={12} md={2}>

@@ -12,7 +12,7 @@ function Footer() {
     <Grid container spacing={3} justify="center" alignItems="center">
       <Grid container item justify="flex-end" align="center" xs={6}>
         <a
-          href="https://www.instagram.com/isfnr/"
+          href="https://www.instagram.com/sti2017tidor/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
@@ -23,7 +23,7 @@ function Footer() {
         </a>
         &nbsp;
         <a
-          href="https://www.instagram.com/isfnr/"
+          href="https://www.instagram.com/sti2017tidor/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
@@ -34,7 +34,7 @@ function Footer() {
         </a>
         &nbsp;
         <a
-          href="https://www.instagram.com/isfnr/"
+          href="https://www.instagram.com/sti2017tidor/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
@@ -45,7 +45,7 @@ function Footer() {
         </a>
         &nbsp;
         <a
-          href="https://www.instagram.com/isfnr/"
+          href="https://www.instagram.com/sti2017tidor/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
@@ -56,7 +56,7 @@ function Footer() {
         </a>
         &nbsp;
         <a
-          href="https://www.instagram.com/isfnr/"
+          href="https://www.instagram.com/sti2017tidor/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}

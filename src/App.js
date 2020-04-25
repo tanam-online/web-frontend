@@ -17,6 +17,8 @@ import Recommendation from "./Components/Recommendation"
 import Account from "./Components/Account"
 import SignUp from "./Components/SignUp"
 import Login from "./Components/Login"
+import Recover from "./Components/Recover"
+import ChangePassword from "./Components/ChangePassword"
 import NotFound from "./Components/NotFound"
 
 function App() {
@@ -45,6 +47,11 @@ function App() {
               <Route component={Account} path="/account" />
               <Route component={SignUp} exact path="/sign-up" />
               <Route component={Login} exact path="/login" />
+              <Route component={Recover} exact path="/recover" />
+              <Route
+                component={ChangePassword}
+                path="/change-password/:encId"
+              />
               <Route component={NotFound} />
             </Switch>
           </Box>

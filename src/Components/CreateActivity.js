@@ -9,7 +9,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import axios from "axios"
 import Swal from "sweetalert2"
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
 import API from "../config"
 
 export default function CreateActivity(props) {
@@ -135,6 +135,6 @@ export default function CreateActivity(props) {
   )
 }
 
-CreateActivity.propTypes.shape({
-  match: PropTypes.object.isRequired
-})
+// CreateActivity.propTypes.shape({
+//   match: PropTypes.object.isRequired
+// })
