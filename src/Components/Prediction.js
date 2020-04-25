@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import { makeStyles } from "@material-ui/core/styles"
 import { Line } from "react-chartjs-2"
 import DateFnsUtils from "@date-io/date-fns"
@@ -102,7 +103,7 @@ function Prediction() {
                 kelembaban: [...prev.kelembaban, item.kelembaban],
                 cahaya: [...prev.cahaya, item.cahaya],
                 angin: [...prev.angin, item.angin],
-                waktu: [...prev.waktu, item.waktu]
+                waktu: [...prev.waktu, `Jam ${item.waktu}`]
               }))
             })
           }
@@ -385,7 +386,6 @@ function Prediction() {
               <Grid item xs={12} md={12}>
                 <FormControl
                   variant="outlined"
-                  required
                   className={classes.formControl}
                   disabled={loadingSelect}
                 >
@@ -411,6 +411,13 @@ function Prediction() {
                 </FormControl>
               </Grid>
             </Grid>
+            {loadingSelect ? (
+              <Grid container justify="center" item xs={12}>
+                <CircularProgress style={{ color: "green" }} />
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Grid>
       )}

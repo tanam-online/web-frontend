@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
@@ -131,7 +132,6 @@ function Recommendation() {
               <Grid item xs={12} md={12}>
                 <FormControl
                   variant="outlined"
-                  required
                   className={classes.formControl}
                   disabled={loadingSelect}
                 >
@@ -157,6 +157,13 @@ function Recommendation() {
                 </FormControl>
               </Grid>
             </Grid>
+            {loadingSelect ? (
+              <Grid container justify="center" item xs={12}>
+                <CircularProgress style={{ color: "green" }} />
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Grid>
       )}

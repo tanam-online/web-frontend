@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import MaterialTable from "material-table"
 import Button from "@material-ui/core/Button"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import Swal from "sweetalert2"
 import axios from "axios"
 import { useCookies } from "react-cookie"
@@ -77,6 +78,13 @@ const Manage = () => {
         </Grid>
       </Grid>
       <br />
+      {loadingData ? (
+        <Grid container justify="center" item xs={12}>
+          <CircularProgress style={{ color: "green" }} />
+        </Grid>
+      ) : (
+        ""
+      )}
       <Grid container item spacing={3} xs={12}>
         <Grid item xs={12}>
           <MaterialTable

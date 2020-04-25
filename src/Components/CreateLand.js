@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
 import Breadcrumbs from "@material-ui/core/Breadcrumbs"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import axios from "axios"
 import Swal from "sweetalert2"
@@ -112,7 +113,11 @@ export default function CreateLand() {
               type="submit"
               disabled={state.loading}
             >
-              {state.loading ? "Mohon tunggu..." : "Buat"}
+              {state.loading ? (
+                <CircularProgress style={{ color: "green" }} />
+              ) : (
+                "Buat"
+              )}
             </Button>
           </Grid>
         </Grid>

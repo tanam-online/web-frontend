@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 import Breadcrumbs from "@material-ui/core/Breadcrumbs"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import Swal from "sweetalert2"
 import axios from "axios"
 // import PropTypes from "prop-types"
@@ -128,6 +129,13 @@ const Land = props => {
         </Grid>
       </Grid>
       <br />
+      {loadingData ? (
+        <Grid container justify="center" item xs={12}>
+          <CircularProgress style={{ color: "green" }} />
+        </Grid>
+      ) : (
+        ""
+      )}
       <Grid container item spacing={3} xs={12}>
         <Grid item xs={12}>
           <MaterialTable

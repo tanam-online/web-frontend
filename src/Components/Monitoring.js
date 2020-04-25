@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import { makeStyles } from "@material-ui/core/styles"
 import { Line } from "react-chartjs-2"
 import DateFnsUtils from "@date-io/date-fns"
@@ -261,7 +262,11 @@ function Monitoring() {
                 onClick={handleSendMail}
                 disabled={loading}
               >
-                {loading ? "Mohon tunggu..." : "Kirim Email Laporan"}
+                {loading ? (
+                  <CircularProgress style={{ color: "green" }} />
+                ) : (
+                  "Kirim Email Laporan"
+                )}
               </Button>
             </Grid>
             <Grid item xs={12} md={2}>
@@ -435,7 +440,6 @@ function Monitoring() {
               <Grid item xs={12} md={12}>
                 <FormControl
                   variant="outlined"
-                  required
                   className={classes.formControl}
                   disabled={loading}
                 >
@@ -461,6 +465,13 @@ function Monitoring() {
                 </FormControl>
               </Grid>
             </Grid>
+            {loading ? (
+              <Grid container justify="center" item xs={12}>
+                <CircularProgress style={{ color: "green" }} />
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Grid>
       )}

@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton"
 import OutlinedInput from "@material-ui/core/OutlinedInput"
 import InputLabel from "@material-ui/core/InputLabel"
 import InputAdornment from "@material-ui/core/InputAdornment"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import FormControl from "@material-ui/core/FormControl"
 import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
@@ -157,7 +158,11 @@ export default function SignUp() {
                 type="submit"
                 disabled={state.loading}
               >
-                {state.loading ? "Mohon tunggu" : "Buat Akun"}
+                {state.loading ? (
+                  <CircularProgress style={{ color: "green" }} />
+                ) : (
+                  "Buat Akun"
+                )}
               </Button>
             </Grid>
           </Grid>
