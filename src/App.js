@@ -9,6 +9,8 @@ import Home from "./Components/Home"
 import Manage from "./Components/Manage"
 import Land from "./Components/Land"
 import CreateLand from "./Components/CreateLand"
+import CreateHarvest from "./Components/CreateHarvest"
+import CreateActivity from "./Components/CreateActivity"
 import Monitoring from "./Components/Monitoring"
 import Prediction from "./Components/Prediction"
 import Recommendation from "./Components/Recommendation"
@@ -29,6 +31,14 @@ function App() {
               <Route component={Manage} exact path="/manage" />
               <Route component={Land} path="/land/:landId" />
               <Route component={CreateLand} exact path="/manage/create-land" />
+              <Route
+                component={CreateHarvest}
+                path="/manage/create-harvest/:landId"
+              />
+              <Route
+                component={CreateActivity}
+                path="/manage/create-activity/:landId"
+              />
               <Route component={Monitoring} path="/monitoring" />
               <Route component={Prediction} path="/prediction" />
               <Route component={Recommendation} path="/recommendation" />

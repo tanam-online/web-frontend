@@ -89,9 +89,11 @@ const Manage = () => {
             data={lands}
             actions={[
               {
-                icon: 'visibility',
-                tooltip: 'Info Lebih Lanjut',
-                onClick: (event, rowData) => { history.push('/land/' + rowData.id); }
+                icon: "visibility",
+                tooltip: "Info Lebih Lanjut",
+                onClick: (event, rowData) => {
+                  history.push(`/land/${rowData.id}`)
+                }
               },
               {
                 icon: "delete",

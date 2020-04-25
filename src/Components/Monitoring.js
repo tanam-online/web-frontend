@@ -87,14 +87,14 @@ function Monitoring() {
   const handleSendMail = event => {
     event.preventDefault()
     setLoading(true)
-    axios.get(`${API.report}/send-email/${userCookies.id}`)
+    axios
+      .get(`${API.report}/send-email/${userCookies.id}`)
       .then(response => {
         console.log(response)
         setLoading(false)
         if (response.status === 200) {
           Swal.fire("Berhasil!", "Email laporan berhasil dikirim", "success")
-        }
-        else {
+        } else {
           Swal.fire("Gagal!", "Oops ada yang salah", "error")
         }
       })

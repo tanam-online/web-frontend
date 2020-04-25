@@ -4,16 +4,18 @@ import MUILink from "@material-ui/core/Link"
 import Grid from "@material-ui/core/Grid"
 import MaterialTable from "material-table"
 import Button from "@material-ui/core/Button"
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Typography from "@material-ui/core/Typography"
+import Breadcrumbs from "@material-ui/core/Breadcrumbs"
+import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import Swal from "sweetalert2"
 import axios from "axios"
-import { useCookies } from "react-cookie"
+import PropTypes from "prop-types"
 import API from "../config"
 
-const Land = (props) => {
-  const { match: { params } } = props;
+const Land = props => {
+  const {
+    match: { params }
+  } = props
 
   const [activities, setActivities] = React.useState([])
   const [harvests, setHarvests] = React.useState([])
@@ -95,13 +97,15 @@ const Land = (props) => {
             <MUILink component={Link} color="inherit" to="/manage">
               Manage
             </MUILink>
-            <Typography color="textPrimary">Info Lahan {params.landId}</Typography>
+            <Typography color="textPrimary">
+              Info Lahan {params.landId}
+            </Typography>
           </Breadcrumbs>
         </Grid>
         <Grid item xs={12} md={6}>
           <Button
             component={Link}
-            to="/manage/create-harvest"
+            to={`/manage/create-harvest/${params.landId}`}
             color="inherit"
             variant="outlined"
             style={{ color: "green", textTransform: "none" }}
@@ -113,7 +117,7 @@ const Land = (props) => {
         <Grid item xs={12} md={6}>
           <Button
             component={Link}
-            to="/manage/create-activity"
+            to={`/manage/create-activity/${params.landId}`}
             color="inherit"
             variant="outlined"
             style={{ color: "green", textTransform: "none" }}
@@ -233,5 +237,9 @@ const Land = (props) => {
     </Grid>
   )
 }
+
+Land.propTypes.shape({
+  match: PropTypes.object.isRequired
+})
 
 export default Land

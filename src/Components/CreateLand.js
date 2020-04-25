@@ -67,7 +67,7 @@ export default function CreateLand() {
               <MUILink component={Link} color="inherit" to="/manage">
                 Manage
               </MUILink>
-              <Typography color="textPrimary">Create</Typography>
+              <Typography color="textPrimary">Create Land</Typography>
             </Breadcrumbs>
           </Grid>
           <Grid item xs={12}>
