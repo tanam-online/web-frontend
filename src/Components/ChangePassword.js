@@ -37,33 +37,33 @@ export default function LoginDosen(props) {
   const handleSubmit = e => {
     e.preventDefault()
     setState({ ...state, loading: true })
-      if (state.password) {
-        const payload = {
-          password: state.password
-        }
-        axios
-          .post(`${API.user}/change-password/${params.encId}`, payload)
-          .then(response => {
-            console.log(response)
-            if (response.status === 200) {
-              Swal.fire(
-                "Berhasil!",
-                "Kata sandi Anda berhasil diganti",
-                "success"
-              )
-            } else {
-              setState({ ...state, loading: false })
-              Swal.fire("Gagal!", "error")
-            }
-          })
-          .catch(error => {
-            setState({ ...state, loading: false })
-            Swal.fire("Gagal!", error, "error")
-          })
-      } else {
-        setState({ ...state, loading: false })
-        Swal.fire("Oops!", "Tolong isi password baru Anda", "error")
+    if (state.password) {
+      const payload = {
+        password: state.password
       }
+      axios
+        .post(`${API.user}/change-password/${params.encId}`, payload)
+        .then(response => {
+          console.log(response)
+          if (response.status === 200) {
+            Swal.fire(
+              "Berhasil!",
+              "Kata sandi Anda berhasil diganti",
+              "success"
+            )
+          } else {
+            setState({ ...state, loading: false })
+            Swal.fire("Gagal!", "error")
+          }
+        })
+        .catch(error => {
+          setState({ ...state, loading: false })
+          Swal.fire("Gagal!", error, "error")
+        })
+    } else {
+      setState({ ...state, loading: false })
+      Swal.fire("Oops!", "Tolong isi password baru Anda", "error")
+    }
   }
 
   return (
@@ -72,9 +72,7 @@ export default function LoginDosen(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <h1 style={{ color: "green" }}>Ganti Password</h1>
-            <h3>
-              Masukkan kata sandi barumu di bawah ini
-            </h3>
+            <h3>Masukkan kata sandi barumu di bawah ini</h3>
           </Grid>
           <Grid item xs={12}>
             <Grid item xs={12} md={5}>

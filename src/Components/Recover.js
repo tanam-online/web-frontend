@@ -35,7 +35,7 @@ export default function LoginDosen() {
             setState({ ...state, loading: false })
             Swal.fire(
               "Sent!",
-              "Link untuk reset password berhasil dikirim ke " + state.email,
+              `Link untuk reset password berhasil dikirim ke ${state.email}`,
               "success"
             )
           } else {
