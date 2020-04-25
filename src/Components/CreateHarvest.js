@@ -10,7 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import axios from "axios"
 import Swal from "sweetalert2"
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types"
 import API from "../config"
 
 export default function CreateHarvest(props) {
@@ -149,6 +149,14 @@ export default function CreateHarvest(props) {
   )
 }
 
-// CreateHarvest.propTypes.shape({
-//   match: PropTypes.object.isRequired
-// })
+CreateHarvest.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      landId: PropTypes.string.isRequired
+    })
+  })
+}
+
+CreateHarvest.defaultProps = {
+  match: {}
+}

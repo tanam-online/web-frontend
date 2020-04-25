@@ -29,8 +29,13 @@ const Manage = () => {
         .then(response => {
           console.log(response)
           if (response.data.data && response.data.data.length > 0) {
-            response.data.data.forEach(item => {
-              item.created_at = new Date(item.created_at).toLocaleString()
+            // response.data.data.forEach((item => {
+            //   item.created_at = new Date(item.created_at).toLocaleString()
+            // })
+            response.data.data.forEach((item, index) => {
+              response.data.data[index].created_at = new Date(
+                item.created_at
+              ).toLocaleString()
             })
             setLoadingData(false)
             setLands(response.data.data)

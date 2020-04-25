@@ -9,11 +9,12 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 import FormControl from "@material-ui/core/FormControl"
 import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
+import PropTypes from "prop-types"
 import Swal from "sweetalert2"
 import axios from "axios"
 import API from "../config"
 
-export default function LoginDosen(props) {
+export default function ChangePassword(props) {
   const {
     match: { params }
   } = props
@@ -130,4 +131,16 @@ export default function LoginDosen(props) {
       </form>
     </div>
   )
+}
+
+ChangePassword.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      encId: PropTypes.string.isRequired
+    })
+  })
+}
+
+ChangePassword.defaultProps = {
+  match: {}
 }

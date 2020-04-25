@@ -9,7 +9,7 @@ import Swal from "sweetalert2"
 import axios from "axios"
 import API from "../config"
 
-export default function LoginDosen() {
+export default function Recover() {
   const [state, setState] = React.useState({
     loading: false
   })

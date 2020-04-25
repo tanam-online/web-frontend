@@ -10,7 +10,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import Swal from "sweetalert2"
 import axios from "axios"
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types"
 import API from "../config"
 
 const Land = props => {
@@ -246,8 +246,16 @@ const Land = props => {
   )
 }
 
-// Land.propTypes.shape({
-//   match: PropTypes.object.isRequired
-// })
+Land.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      landId: PropTypes.string.isRequired
+    })
+  })
+}
+
+Land.defaultProps = {
+  match: {}
+}
 
 export default Land
