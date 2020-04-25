@@ -48,11 +48,6 @@ function HeaderComponent(props) {
     removeCookie("email", { path: "/" })
     removeCookie("role", { path: "/" })
     removeCookie("no_telepon", { path: "/" })
-    // document.cookie = `id=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    // document.cookie = `nama=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    // document.cookie = `email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    // document.cookie = `role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
-    // document.cookie = `no_telepon=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`
     history.push("/")
   }
 
@@ -66,6 +61,7 @@ function HeaderComponent(props) {
           path === "/prediction" ||
           path === "/recommendation" ||
           path === "/manage" ||
+          path.slice(0, 5) === "/land" ||
           path === "/manage/create-land" ||
           path === "/manage/create-harvest" ||
           path === "/manage/create-activity" ||

@@ -7,6 +7,7 @@ import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Home from "./Components/Home"
 import Manage from "./Components/Manage"
+import Land from "./Components/Land"
 import CreateLand from "./Components/CreateLand"
 import Monitoring from "./Components/Monitoring"
 import Prediction from "./Components/Prediction"
@@ -24,33 +25,16 @@ function App() {
         <Container>
           <Box my={12.5}>
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/manage">
-                <Manage />
-              </Route>
-              <Route exact path="/manage/create-land">
-                <CreateLand />
-              </Route>
-              <Route path="/monitoring">
-                <Monitoring />
-              </Route>
-              <Route path="/prediction">
-                <Prediction />
-              </Route>
-              <Route path="/recommendation">
-                <Recommendation />
-              </Route>
-              <Route path="/account">
-                <Account />
-              </Route>
-              <Route exact path="/sign-up">
-                <SignUp />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
+              <Route component={Home} exact path="/" />
+              <Route component={Manage} exact path="/manage" />
+              <Route component={Land} path="/land/:landId" />
+              <Route component={CreateLand} exact path="/manage/create-land" />
+              <Route component={Monitoring} path="/monitoring" />
+              <Route component={Prediction} path="/prediction" />
+              <Route component={Recommendation} path="/recommendation" />
+              <Route component={Account} path="/account" />
+              <Route component={SignUp} exact path="/sign-up" />
+              <Route component={Login} exact path="/login" />
               <Route component={NotFound} />
             </Switch>
           </Box>

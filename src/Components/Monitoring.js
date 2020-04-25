@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 function Monitoring() {
   const [userCookies] = useCookies(["userCookie"])
   const [lands, setLands] = React.useState([])
-  const [loadingSelect, setLoadingSelect] = React.useState(true)
+  const [loading, setLoading] = React.useState(true)
   const [selectedDate, setSelectedDate] = React.useState(new Date())
   const [land, setLand] = React.useState("")
   const [average, setAverage] = React.useState({
@@ -82,6 +82,27 @@ function Monitoring() {
   const handleDownload = event => {
     event.preventDefault()
     window.open(`${API.report}/download/${land.id}`, "_blank")
+  }
+
+  const handleSendMail = event => {
+    event.preventDefault()
+    setLoading(true)
+    axios.get(`${API.report}/send-email/${userCookies.id}`)
+      .then(response => {
+        console.log(response)
+        setLoading(false)
+        if (response.status === 200) {
+          Swal.fire("Berhasil!", "Email laporan berhasil dikirim", "success")
+        }
+        else {
+          Swal.fire("Gagal!", "Oops ada yang salah", "error")
+        }
+      })
+      .catch(error => {
+        setLoading(false)
+        console.log(error.response)
+        Swal.fire("Gagal!", "Oops ada yang salah", "error")
+      })
   }
 
   React.useEffect(() => {
@@ -149,11 +170,11 @@ function Monitoring() {
         .get(`${API.land}/lands/by-user/${userCookies.id}`)
         .then(response => {
           if (response.data.data && response.data.data.length > 0) {
-            setLoadingSelect(false)
+            setLoading(false)
             setLands(response.data.data)
           } else {
             console.log("no data")
-            setLoadingSelect(false)
+            setLoading(false)
             Swal.fire("Gagal!", "Anda belum mendaftarkan lahan", "error")
           }
         })
@@ -220,7 +241,7 @@ function Monitoring() {
                 {land.nama}, sejak {selectedDate.toDateString()}
               </h3>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={2}>
               <Button
                 color="inherit"
                 variant="outlined"
@@ -231,7 +252,18 @@ function Monitoring() {
                 Unduh Laporan
               </Button>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={2}>
+              <Button
+                color="inherit"
+                variant="outlined"
+                fullWidth
+                style={{ color: "green", textTransform: "none" }}
+                onClick={handleSendMail}
+              >
+                Kirim Email Laporan
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={2}>
               <Button
                 color="inherit"
                 variant="outlined"
@@ -404,10 +436,10 @@ function Monitoring() {
                   variant="outlined"
                   required
                   className={classes.formControl}
-                  disabled={loadingSelect}
+                  disabled={loading}
                 >
                   <InputLabel id="land-select-label">
-                    {loadingSelect ? "Mohon tunggu sebentar..." : "Pilih Lahan"}
+                    {loading ? "Mohon tunggu sebentar..." : "Pilih Lahan"}
                   </InputLabel>
                   <Select
                     labelId="land-select-label"

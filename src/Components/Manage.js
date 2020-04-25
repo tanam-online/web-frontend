@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import MaterialTable from "material-table"
 import Button from "@material-ui/core/Button"
@@ -47,6 +47,8 @@ const Manage = () => {
     fetchDataLandsByUser()
   }, [userCookies])
 
+  const history = useHistory()
+
   return (
     <Grid container spacing={3} justify="center">
       <Grid
@@ -58,6 +60,9 @@ const Manage = () => {
         justify="center"
         xs={12}
       >
+        <Grid item xs={12} md={3}>
+          <h1 style={{ color: "green" }}>Kelola Lahanmu</h1>
+        </Grid>
         <Grid item xs={12} md={9}>
           <Button
             component={Link}
@@ -83,6 +88,11 @@ const Manage = () => {
             columns={columns}
             data={lands}
             actions={[
+              {
+                icon: 'visibility',
+                tooltip: 'Info Lebih Lanjut',
+                onClick: (event, rowData) => { history.push('/land/' + rowData.id); }
+              },
               {
                 icon: "delete",
                 tooltip: "Delete",
